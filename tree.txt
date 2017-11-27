@@ -1,0 +1,42 @@
+.
+├── Controllers
+│   ├── AdministrationController.php
+│   ├── Controller.php
+│   ├── ErrorController.php
+│   ├── HomeController.php
+│   ├── PostController.php
+│   ├── ReviewController.php
+│   ├── RouterController.php
+│   └── SigninController.php
+├── db
+│   ├── create_db.sql
+│   ├── export.sql
+│   ├── konference.mwb
+│   └── konference.mwb.bak
+├── Design.css
+├── Effects.js
+├── index.php
+├── Models
+│   ├── AdministrationModel.php
+│   ├── Database.php
+│   ├── HomeModel.php
+│   ├── LoginModel.php
+│   ├── PostModel.php
+│   ├── ReviewModel.php
+│   ├── SessionHandle.php
+│   └── SigninModel.php
+├── tree.txt
+├── uploads
+│   └── 3
+│       └── jen zpravodaj.pdf
+├── Views
+│   ├── administration.phtml
+│   ├── error.phtml
+│   ├── hlavni.phtml
+│   ├── home.phtml
+│   ├── post.phtml
+│   ├── review.phtml
+│   └── signin.phtml
+└── zcu.png
+
+6 directories, 33 files

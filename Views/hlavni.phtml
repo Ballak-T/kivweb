@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="../Effects.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../Design.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo $title ?></title>
+    <meta name="description" content="<?php echo $description ?>" />
+    <meta name="keywords" content="<?php echo $key_words ?>" />
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home"><span class="glyphicon glyphicon-comment"></span> <span class="brand-text">Konference</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav">
+                <li <?php if ($_SERVER[REQUEST_URI] == '/home')echo ('class="active"');?>><a href="/home">Domů</a></li>
+                <li <?php if ($_SERVER[REQUEST_URI] == '/post')echo ('class="active"');?>><a href="/post">Příspěvky</a></li>
+                <?php if ($_SESSION['rights'] == 'Administrátor'){
+                    $active = '';
+                    if ($_SERVER[REQUEST_URI] == '/administration')$active = 'active';
+                    echo ('<li class="'.$active.'"><a href="/administration">Správa uživatelů</a></li>')
+                    ;}?>
+                <?php if ($_SESSION['rights'] == 'Recenzent'){
+                    $active = '';
+                    if ($_SERVER[REQUEST_URI] == '/review')$active = 'active';
+                    echo ('<li class="'.$active.'"><a href="/review">Recenzování</a></li>')
+                    ;}?>
+                <li><a href="#">O konferenci</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <?php if (!isset($_SESSION['username'])) echo('
+                        <li id="log-in-switch" onclick="toggle(\'log-in\')"><a><span class="glyphicon glyphicon-log-in"></span> Přihlásit</a></li>
+                        <li id="sign-in-switch" onclick="toggle(\'sign-in\')"><a href="signin"><span class="glyphicon glyphicon-pencil"></span> Registrovat</a></li>
+                ');
+                else echo ('
+                
+                <li id="user-name" class="no-hover"><a><span class="glyphicon glyphicon-user"></span> '.$_SESSION["username"].' <span class="label label-primary">'.$_SESSION["rights"].'</span></a></li>
+                <form name="logout" method="Post" class="logout-form" action="'.$_SERVER[REQUEST_URI].'">
+                <li id="log-out-switch">
+                    <button type="submit" class="btn btn-danger" name="logout" value="logout">Odhlásit</button>
+                    </li>
+                </form>
+                ')?>
+            </ul>
+        </div>
+    </div>
+</nav>
+<?php if (isset($_SESSION['username']) && isset($_POST['send'])) echo '<div class="alert alert-success fade-out">
+<strong>
+<span class="glyphicon glyphicon-thumbs-up"></span></strong> Byl jste úspěšně přihlášen</div>';
+?>
+<?php if (isset($_POST['logout'])) echo '<div class="alert alert-danger fade-out">
+<strong>
+<span class="glyphicon glyphicon-thumbs-up"></span></strong> Byl jste úspěšně odhlášen</div>';
+?>
+<?php if (isset($loginError)) echo '<div class="alert alert-danger fade-out">
+<strong>
+<span class="glyphicon glyphicon-exclamation-sign"></span> </strong> '.$loginError.'</div>';
+?>
+<?php $this->controller->printView(); ?>
+<section class="box-middle log-in" id="log-in">
+    <div class="container-fluid">
+        <div class="exit" onclick="toggle('log-in')">
+            <span class="glyphicon glyphicon-remove"></span>
+        </div>
+        <form class="form-signin" action="<?php echo $_SERVER[REQUEST_URI];?>" method="post">
+            <h2 class="form-signin-heading">Přihlášení</h2>
+            <label for="inputEmail" class="sr-only">Email</label>
+            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Emailová adresa" required>
+            <label for="inputPassword" class="sr-only">Heslo</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Heslo" required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Zapomatovat si
+                </label>
+            </div>
+            <button class="button-my" type="submit" name="send" value="s">Přihlásit</button>
+            <a href="signin">Registrovat</a>
+        </form>
+    </div>
+</section>
+
+<footer class="container-fluid text-center">
+    <p><img src="zcu.png" height="30" width="65" class="school-logo" alt="zcu-logo"/> © 2017</p>
+</footer>
+</body>

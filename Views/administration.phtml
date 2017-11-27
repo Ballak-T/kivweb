@@ -1,0 +1,74 @@
+<?php if (isset($_POST['send_post']) && isset($successChange)) echo '<div class="alert alert-success fade-out">
+<strong>
+<span class="glyphicon glyphicon-thumbs-up"></span></strong> '.$successChange.'</div>';
+?>
+<?php if (isset($_POST['send_post']) && isset($errorChange)) echo '<div class="alert alert-danger fade-out">
+<strong>
+<span class="glyphicon glyphicon-exclamation-sign"></span></strong> '.$errorChange.'</div>';
+?>
+<div class="container">
+    <h1>Uživatelé</h1>
+    <table class="table table-responsive">
+        <thead>
+        <tr class="dark-blue header">
+            <th>#</th>
+            <th>Jméno</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Ban</th>
+            <th>Změnit status</th>
+            <th>Udělit / zrušit ban</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        $i = 0;
+        foreach ($users as $user) {
+            $i++;
+            echo '<tr>
+            <th scope="row" class="num plastic-little">'.$i.'</th>
+            <td>'.$user['name'].'</td>
+            <td>'.$user['email'].'</td>
+            <td>'.$user['status'].'</td>
+            <td>'.$user['ban'].'</td>
+            <td>  
+  <div class="dropdown">
+  <button class="btn btn-secondary" type="button" data-toggle="dropdown">Výběr statusu
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a href="?newStatus=1&id='.$user['idUser'].'">Autor</a></li>
+    <li><a href="?newStatus=2&id='.$user['idUser'].'">Recenzent</a></li>
+    <li><a href="?newStatus=3&id='.$user['idUser'].'">Administrátor</a></li>
+  </ul>
+  </div>
+            <td><a href="?ban='.abs($user['ban'] - 1).'&id='.$user['idUser'].'"><span class="glyphicon glyphicon-wrench plastic big"></span></a></td>
+            ';
+            }
+            echo '</tr>';
+        ?>
+        </tbody>
+    </table>
+    <?php if(($_SESSION['rights'] == 'Autor')) echo ('<p><a class="btn btn-primary btn-success" onclick="toggle(\'adding\')" role="button"><span class="glyphicon glyphicon-plus"></span> Přidat příspěvek</a></p>');?>
+
+
+</div>
+<div class="box-middle contribution" id="adding">
+    <form class="form-adding" method="post" id="form-post" enctype="multipart/form-data" action="<?php echo $_SERVER[REQUEST_URI];?>">
+        <div class="form-group">
+            <div class="exit" onclick="toggle('adding')">
+                <span class="glyphicon glyphicon-remove"></span>
+            </div>
+            <h1>Přidání příspěvku</h1>
+            <div class="form-group">
+                <label for="name_p">Téma příspěvku:</label>
+                <input type="text" class="form-control" id="name_p" name="topic" required>
+            </div>
+            <label for="content">Obsah příspěvku:</label>
+            <textarea class="form-control" rows="5" cols="50" id="content" name="content" required></textarea>
+            <label for="document">Přidat <i>PDF (max 50mb)</i>:</label>
+            <input type="file" accept="application/pdf" id="document" name="document">
+            <br>
+            <button class="button-my" type="submit" name="send_post" value="add">Přidat</button>
+        </div>
+    </form>
+</div>

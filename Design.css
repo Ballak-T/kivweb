@@ -1,0 +1,391 @@
+body{
+    margin-top: 50px;
+}
+table th,table td{
+    vertical-align: middle !important;
+    text-align: center;
+    display: table-cell;
+}
+table td span{
+    cursor: pointer;
+}
+table tr{
+    transition: background 0.2s ease-out;
+}
+table th:hover{
+    background: rgba(0,0,0,0.1);
+}
+table td .glyphicon.glyphicon-remove{
+    color: red;
+}
+table img{
+
+}
+textarea{
+    border-radius: 3px;
+    padding: 5px;
+}
+footer{
+    background: black;
+    padding: 5px;
+    bottom: 0px;
+    position: relative;
+    display: block;
+    width:100%;
+    z-index:-1;
+}
+footer p{
+    padding: 0px;
+    margin: 0px;
+    text-align: left;
+    color: White;
+}
+.huge.table-responsive{
+    max-width: 100%;
+    overflow-x: scroll;
+    display: inline-block;
+    height: auto;
+}
+.num{
+    background: rgb(100,100,100);
+    color: white;
+}
+.plastic{
+    text-shadow:0px 1px 0px rgba(255, 255, 255, 1),
+    0px 2px 0px rgba(245, 245, 245, 1),
+    0px 3px 0px rgba(235, 235, 235, 1),
+    0px 6px 6px rgba(0, 0, 0, .2);
+}
+.plastic-little{
+    text-shadow:0px 1px 0px rgba(255, 255, 255, 1),
+    0px 6px 6px rgba(0, 0, 0, .2);
+}
+a:hover{
+    cursor: pointer;
+}
+.no-hover a{
+    color: white!important;
+    cursor: default;
+}
+nav .label-primary{
+    padding: 6px;
+    position: relative;
+    top:-1px;
+    left:3px;
+}
+.big{
+    font-size: 30pt;
+}
+.header th{
+    border-right: 1px solid rgba(255,255,255,0.1) !important;
+}
+.logout-form{
+    display: inline-block;
+    position: relative;
+    float: left;
+    top:8px;
+    padding-right: 8px;
+}
+.school-logo{
+    margin-left: -10px;
+    transition: filter 0.3s ease-out;
+    cursor: pointer;
+}
+.school-logo:hover{
+    -webkit-filter: brightness(3);
+    filter: brightness(3);
+}
+.brand-text{
+    position: relative;
+    top: -3px;
+    font-size: 11pt;
+}
+.brand-text::after{
+    height: 2px;
+    width: 30px;
+    border-bottom: 2px;
+    background: black;
+    top:3px;
+    position: relative;
+    left: 50%;
+    margin-left: -10px;
+    display: block;
+    content: "";
+    transform: scalex(1);
+    transition: all 0.3s ease-out;
+
+}
+.navbar-inverse .navbar-brand:hover .brand-text::after{
+    transform: scalex(3);
+    background: gray;
+}
+.jumbotron{
+    margin-bottom: 0px;
+    padding-top: 225px;
+    padding-bottom: 225px;
+}
+.dark-blue{
+    background: #446CB3;
+    color: white;
+}
+.blue{
+    background: #4183D7;
+    color: white;
+}
+.orange{
+    background: #F22613;
+    color: white;
+}
+
+.blue h1,.orange h1, .dark-blue h1{
+    text-shadow:0px 1px 0px rgba(255, 255, 255, 1),
+                0px 2px 0px rgba(245, 245, 245, 1),
+                0px 3px 0px rgba(235, 235, 235, 1),
+                0px 6px 6px rgba(0, 0, 0, .5);
+}
+.little-shadow{
+    -webkit-box-shadow: 0px 0px 8px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 8px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 8px -2px rgba(0,0,0,0.75);
+}
+.little-shadow-side{
+    -webkit-box-shadow: 4px 0px 7px -5px rgba(0,0,0,0.75),-4px 0px 7px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 0px 7px -5px rgba(0,0,0,0.75),-4px 0px 7px -5px rgba(0,0,0,0.75);
+    box-shadow: 4px 0px 7px -5px rgba(0,0,0,0.75),-4px 0px 7px -5px rgba(0,0,0,0.75);
+}
+.black-font{
+    color: black;
+}
+.navbar{
+    border-radius: 0px;
+    background: rgb(40,40,40);
+    -webkit-box-shadow: 0px 0px 10px -2px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 10px -2px rgba(0,0,0,1);
+    box-shadow: 0px 0px 10px -2px rgba(0,0,0,1);
+    z-index:1;
+    border:0px;
+}
+.texture{
+    background-image: url('confectionary.png');
+}
+.navbar-inverse .navbar-collapse{
+    border: 0px;
+}
+.box-middle{
+    position: fixed;
+    display: block;
+    top: 50%;
+    margin-top: -160px;
+    left: 50%;
+    margin-left:-250px;
+    height:320px;
+    width: 500px;
+    background: whitesmoke;
+    padding: 50px;
+    -webkit-box-shadow: 0px 0px 100px -5px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 0px 100px -5px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 60px -20px rgba(0,0,0,0.2),
+                0px 0px 10px -5px rgba(0,0,0,1);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: white;
+    transition: background 0.3s ease-out;
+    -webkit-transition: background 0.3s ease-out;
+}
+.btn-file:hover{
+    background: whitesmoke;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+.log-in{
+    display: block;
+    transform: scale3d(0,0,0);
+    transition: transform 0.3s ease-out;
+}
+.sign-in{
+    position: relative;
+    height: 410px;
+    margin-top: 0px;
+    transition: transform 0.3s ease-out;
+}
+.little-padding{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.review{
+    display: none;
+    height: auto;
+    width:auto;
+    margin-top: -240px;
+}
+.contribution{
+    height: auto;
+    width: auto;
+    margin-top: -275px;
+    display: block;
+    transform: scale3d(0,0,0);
+    transition: transform 0.3s ease-out;
+}
+.sign-in input[type="name"],.sign-in input[type="email"],.sign-in input[type="password"]{
+    margin-top: 10px;
+}
+.back{
+    position: absolute;
+    -webkit-box-shadow: 0px 6px 8px -3px rgba(0,0,0,0.36);
+    -moz-box-shadow: 0px 6px 8px -3px rgba(0,0,0,0.36);
+    box-shadow: 0px 6px 8px -3px rgba(0,0,0,0.36);
+
+}
+.inline-block{
+    display: inline-block;
+}
+.box-middle .container-fluid{
+    background: transparent;
+    color:black;
+}
+.box-middle .container-fluid input[type='password']{
+    margin-top: 10px;
+}
+.button-my{
+    width: 100%;
+    padding: 10px;
+    background:dodgerblue;
+    border: 0px;
+    border-radius: 2px;
+    color: white;
+    font-family: Roboto;
+    transition: all 0.3s  ease-out;
+    -webkit-transition: all 0.3s  ease-out;
+    -webkit-box-shadow: 0px 2px 16px -4px rgba(0,0,0,0);
+    -moz-box-shadow: 0px 2px 16px -4px rgba(0,0,0,0);
+    box-shadow: 0px 2px 16px -4px rgba(0,0,0,0);
+}
+.button-my:hover{
+    -webkit-box-shadow: 0px 2px 16px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 16px -4px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 16px -4px rgba(0,0,0,0.75);
+}
+.btn-success{
+    border: 0px;
+    background: #2ecc71;
+    transition: background 0.3s ease-out;
+    text-shadow: none;
+}
+.btn-danger{
+    border: 0px !important;
+    background: #D91E18;
+    transition: background 0.3s ease-out;
+    text-shadow: none;
+}
+.btn-success:hover{
+    background: rgb(16, 174, 83);
+}
+.exit {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+    font-size: 12pt;
+    cursor: pointer;
+    transition: transform 0.3s ease-out;
+    transform: scale3d(1, 1, 1);
+}
+.exit:hover{
+    transform: scale3d(1.5,1.5,1.5);
+}
+.exit:active{
+    transition: transform 0.2s ease-out;
+    transform: scale3d(1,1,1);
+
+}
+@media only screen and (max-width: 800px) {
+    .navbar{
+        overflow-y: scroll !important;
+        max-height: 290px !important;
+    }
+    .box-middle{
+        position: fixed;
+        width: 100%;
+        left:0%;
+        margin-left:0px;
+        margin-top: 0px;
+        top: 0px;
+        height:100%;
+        overflow-y: scroll;
+        padding: 5px;
+        background-image: url('confectionary.png');
+        z-index:2;
+    }
+    .exit {
+        right: 10px;
+        top: 10px;
+    }
+    .back{
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        z-index: 10;
+        display: block;
+    }
+    .table-responsive{
+        width: 100%;
+        overflow-x: scroll;
+        display: block;
+    }
+    .alert{
+        position: fixed;
+        top: 340px;
+        display: block;
+        z-index: 1000000;
+        width:90%;
+
+    }
+    .logout-form{
+        padding: 10px;
+        width: 99%;
+    }
+    .logout-form button{
+        width: 99%;
+        position: relative;
+        left:1%;
+    }
+}
+.fade-out{
+    position: absolute;
+    left:35%;
+    width: 30%;
+    top:100px;
+    padding: 30px;
+    animation-name: fade;
+    animation-duration: 3s;
+    opacity:0;
+}
+@keyframes fade {
+    from {opacity: 1;top: 100px;}
+    to {opacity: 0;top: 200px;}
+}
+@media only screen and (max-width: 400px) {
+    .back{
+        display: none;
+    }
+}
+@media only screen and (min-width: 768px) {
+}

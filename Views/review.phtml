@@ -1,0 +1,87 @@
+<?php if (isset($successMessage)) echo '<div class="alert alert-success fade-out">
+<strong>
+<span class="glyphicon glyphicon-thumbs-up"></span></strong> '.$successMessage.'</div>';
+?>
+<?php if (isset($errorMessage)) echo '<div class="alert alert-danger fade-out">
+<strong>
+<span class="glyphicon glyphicon-exclamation-sign"></span></strong> '.$errorMessage.'</div>';
+?>
+<?php
+    echo ('
+    <div class="container">
+    <h1>Přidělené recenze</h1>
+    <table class="table table-responsive">
+        <thead>
+        <tr class="blue header">
+            <th>#</th>
+            <th>Téma</th>
+            <th>Autor</th>
+            <th>Hotovo</th>
+        </tr>
+        </thead>
+        <tbody>
+        ');
+    $i=0;
+    foreach ($task as $item) {
+        $i++;
+        echo '<tr>
+            <th scope="row" class="num plastic-little">'.$i.'</th>
+            <td>'.$item['topic'].'</td>
+            <td>'.$item['author'].'</td>
+            <td>';if($item['Made']){echo('<span class="glyphicon glyphicon-ok"></span>');}else{echo('<span class="glyphicon glyphicon-remove"></span>');} echo '</td>';
+    }
+    echo ('
+        </tbody>
+    </table>');
+if(($_SESSION['rights'] == 'Recenzent')) {echo ('
+<p><a class="btn btn-primary btn-success" onclick="toggle(\'adding\')" role="button"><span class="glyphicon glyphicon-plus"></span> Přidat recenzi</a></p>
+</div>');
+echo ('
+
+</div>
+<div class="box-middle contribution" id="adding">
+    <form class="form-adding" method="post" id="form-post" action="review">
+        <div class="form-group">
+            <div class="exit" onclick="toggle(\'adding\')">
+                <span class="glyphicon glyphicon-remove"></span>
+            </div>
+            <h1>Recenze</h1>
+            <div class="form-group">
+                <label for="name_p">Originalita(1 - 5)</label>
+                <input type="number" name="originality" min="1" max="5" required>
+            </div>
+            <div class="form-group">
+                <label for="name_p">Téma(1 - 5)</label>
+                <input type="number" name="topic" min="1" max="5" required>
+            </div>
+            <div class="form-group">
+                <label for="name_p">Technická kvalita(1 - 5)</label>
+                <input type="number" name="technique" min="1" max="5" required>
+            </div>
+            <div class="form-group">
+                <label for="name_p">Jazyková kvalita(1 - 5)</label>
+                <input type="number" name="language" min="1" max="5" required>
+            </div>
+            <div class="form-group">
+                <label for="name_p">Doporučení(1 - 5)</label>
+                <input type="number" name="recommendation" min="1" max="5" required>
+            </div>
+            <div class="form-group">
+                <label for="name_p">Poznámka</label>
+                <textarea class="form-control" rows="5" cols="50" id="content" name="note"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="name_p">Výběr příspěvku</label>
+                <select name="post">
+                ');
+foreach ($task as $item) {
+    echo '<option value="'.$item['idTask'].'">'.$item['topic'].'</option>';
+}
+echo ('
+                </select>
+            </div>
+            <button class="button-my" type="submit" name="send_review" value="add">Přidat</button>
+        </div>
+    </form>
+</div>
+    ');}?>

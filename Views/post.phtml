@@ -1,0 +1,175 @@
+<?php if (isset($successPost)) echo '<div class="alert alert-success fade-out">
+<strong>
+<span class="glyphicon glyphicon-thumbs-up"></span></strong> '.$successPost.'</div>';
+?>
+<?php if (isset($errorPost)) echo '<div class="alert alert-danger fade-out">
+<strong>
+<span class="glyphicon glyphicon-exclamation-sign"></span></strong> '.$errorPost.'</div>';
+?>
+<?php
+if (isset($assigned)) {
+    echo ('
+    <div class="container">
+    <h1>Přidělené recenze</h1>
+    <table class="table table-responsive">
+        <thead>
+        <tr class="blue header">
+            <th>#</th>
+            <th>Téma</th>
+            <th>Autor</th>
+            <th>Recenzent</th>
+        </tr>
+        </thead>
+        <tbody>
+        ');
+    $i=0;
+    foreach ($assigned as $item) {
+        $i++;
+        echo '<tr>
+            <th scope="row" class="num plastic-little">'.$i.'</th>
+            <td>'.$item['topic'].'</td>
+            <td>'.$item['author'].'</td>
+            <td>'.$item['name'].'</td>';
+    }
+    echo ('
+        </tbody>
+    </table>
+</div>');
+    }
+if (isset($myPosts)) {
+    echo ('
+<div class="container">
+    <h1>Moje příspěvky</h1>
+    <table class="table table-responsive">
+        <thead>
+        <tr class="blue header">
+            <th>#</th>
+            <th>Téma</th>
+            <th>Autor</th>
+            <th>Obsah</th>
+            <th>Pdf</th>
+            <th>Odstranit</th>
+        </tr>
+        </thead>
+        <tbody>');
+                $i = 0;
+                foreach ($myPosts as $post) {
+                    $i++;
+                    echo '<tr>
+            <th scope="row" class="num plastic-little">'.$i.'</th>
+            <td>'.$post['topic'].'</td>
+            <td>'.$post['author'].'</td>
+            <td><textarea readonly style="resize: none;" rows="6" cols="50" class="black-font">'.$post['content'].'</textarea></td>';
+                    if ($post['filename'] != ''){
+                        echo '<td><a href="'.$post['filename'].'" download><span class="glyphicon glyphicon-download-alt big"></span></a></td>';
+                    }else{
+                        echo '<td></td>';
+                    }
+                    echo '<td><a href="?del='.$post["idPost"].'"><span class="glyphicon glyphicon-remove big"></span></a></td></tr>';}
+            }
+        ?>
+
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <h1>Příspěvky</h1>
+    <table class="table <?php if ($_SESSION['rights'] == 'Administrátor')echo 'huge';?> table-responsive">
+        <thead>
+        <tr class="dark-blue header">
+            <th>#</th>
+            <th>Téma</th>
+            <th>Autor</th>
+            <th>Obsah</th>
+            <th>Pdf</th>
+            <?php if ($_SESSION['rights'] == 'Administrátor')echo ('<th>Smazat</th><th>Předat k recenzi</th>');?>
+            <?php if ($_SESSION['rights'] == 'Administrátor')echo ('<th>Recenze</th>');?>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        $i = 0;
+        foreach ($posts as $post) {
+            $id = $post['idPost'];
+            $i++;
+            echo '<tr>
+            <th scope="row" class="num plastic-little">'.$i.'</th>
+            <td>'.$post['topic'].'</td>
+            <td>'.$post['author'].'</td>
+            <td><textarea readonly style="resize: none;" rows="6" cols="50" class="black-font">'.$post['content'].'</textarea></td>';
+            if ($post['filename'] != ''){
+                echo '<td><a href="'.$post['filename'].'" download><span class="glyphicon glyphicon-download-alt big"></span></a></td>';
+            }else{
+                echo '<td></td>';
+            }
+            if($_SESSION['rights'] == 'Administrátor'){
+                echo '<td><a href="?del='.$post["idPost"].'"><span class="glyphicon glyphicon-remove big"></span></a></td>';
+                echo '<td> 
+  <div class="dropdown">
+    <button class="btn btn-secondary" type="button" data-toggle="dropdown">Výběr Recenzenta
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">';
+                foreach ($reviewers as $reviewer) {
+                    echo '
+        <li><a href="?postId=' . $post['idPost'] . '&userId=' . $reviewer['idUser'] . '">' . $reviewer['name'] . '</a></li>';
+                }
+                echo '
+    </ul>
+  </div>
+</td>';
+                echo ('<td>');
+                foreach ($reviews as $review){
+                    if ($review['idPost'] == $id){
+                        echo ('
+    <table class="table table-bordered">
+        <th>Originalita</th>
+        <th>Téma</th>
+        <th>Technika</th>
+        <th>Jazyk</th>
+        <th>Doporučení</th>
+        <th>Komentář</th>
+        <th>Celková známka</th>
+        <tr>
+            <td>'.$review['originality'].'</td>
+            <td>'.$review['topic'].'</td>
+            <td>'.$review['technique'].'</td>
+            <td>'.$review['language'].'</td>
+            <td>'.$review['recommendation'].'</td>
+            <td>'.$review['comment'].'</td>
+            <td>'.((intval($review['originality'])+intval($review['topic'])+intval($review['technique'])+intval($review['language'])+intval($review['recommendation']))/5).'</td>
+        </tr>
+    </table>
+    ');
+                    }
+                }
+                echo ('</td>');
+                }
+
+            }
+            ?>
+        </tbody>
+    </table>
+<?php if(($_SESSION['rights'] == 'Autor')) echo ('<p><a class="btn btn-primary btn-success" onclick="toggle(\'adding\')" role="button"><span class="glyphicon glyphicon-plus"></span> Přidat příspěvek</a></p>');?>
+
+
+</div>
+<div class="box-middle contribution" id="adding">
+    <form class="form-adding" method="post" id="form-post" enctype="multipart/form-data" action="<?php echo $_SERVER[REQUEST_URI];?>">
+        <div class="form-group">
+            <div class="exit" onclick="toggle('adding')">
+                <span class="glyphicon glyphicon-remove"></span>
+            </div>
+            <h1>Přidání příspěvku</h1>
+            <div class="form-group">
+                <label for="name_p">Téma příspěvku:</label>
+                <input type="text" class="form-control" id="name_p" name="topic" required>
+            </div>
+            <label for="content">Obsah příspěvku:</label>
+            <textarea class="form-control" rows="5" cols="50" id="content" name="content" required></textarea>
+            <label for="document">Přidat <i>PDF (max 50mb)</i>:</label>
+            <input type="file" accept="application/pdf" id="document" name="document">
+            <br>
+            <button class="button-my" type="submit" name="send_post" value="add">Přidat</button>
+        </div>
+    </form>
+</div>
