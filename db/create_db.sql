@@ -58,14 +58,8 @@ CREATE TABLE IF NOT EXISTS `konference`.`Post` (
   `author` VARCHAR(45) NOT NULL,
   `filename` VARCHAR(45) NULL,
   `accepted` TINYINT(1) NULL,
-  `User_idUser` INT NOT NULL,
-  PRIMARY KEY (`idPost`),
-  INDEX `fk_Post_User1_idx` (`User_idUser` ASC),
-  CONSTRAINT `fk_Post_User1`
-    FOREIGN KEY (`User_idUser`)
-    REFERENCES `konference`.`User` (`idUser`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `User_idUser` INT,
+  PRIMARY KEY (`idPost`))
 ENGINE = InnoDB;
 
 
@@ -83,13 +77,7 @@ CREATE TABLE IF NOT EXISTS `konference`.`Review` (
   `recommendation` INT(1) NOT NULL,
   `comment` VARCHAR(45) NOT NULL,
   `User_idUser` INT NOT NULL,
-  PRIMARY KEY (`idReview`),
-  INDEX `fk_Review_User1_idx` (`User_idUser` ASC),
-  CONSTRAINT `fk_Review_User1`
-    FOREIGN KEY (`User_idUser`)
-    REFERENCES `konference`.`User` (`idUser`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`idReview`))
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `konference`.`Post_has_Review` (
@@ -115,19 +103,33 @@ CREATE TABLE IF NOT EXISTS `konference`.`Task` (
   `Post_idPost` INT NOT NULL,
   `Made` TINYINT(1) NOT NULL,
   `User_idUser` INT NOT NULL,
-  PRIMARY KEY (`idTask`),
-  INDEX `fk_Task_User1_idx` (`User_idUser` ASC),
-  CONSTRAINT `fk_Task_User1`
-    FOREIGN KEY (`User_idUser`)
-    REFERENCES `konference`.`User` (`idUser`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Task_Post1`
-    FOREIGN KEY (`Post_idPost`)
-    REFERENCES `konference`.`Post` (`idPost`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`idTask`))
 ENGINE = InnoDB;
 
-INSERT INTO `konference`.`User` (`name`, `email`, `password`, `status`, `ban`, `man`)
-VALUES ('admin','admin@email.cz','$2y$10$bvMX0iyMXMvyxEBq1QjDSucDf21Qi3I1lltyS/.uh4W93EtM1bi32','3',0,1);
+
+INSERT INTO `Post` (`idPost`, `topic`, `content`, `author`, `filename`, `accepted`, `User_idUser`) VALUES
+(2, 'Prispevek Novy', 'dasdasdasdsdsadasd', 'testing', '', 0, 3),
+(3, 'laskdůlsad', 'sdůlfksdlfůsfd', 'testing', 'uploads/3/jen zpravodaj.pdf', 0, 3),
+(4, 'erkwelkrlůewkrw', 'ůlkerůkerltůker', 'testing', '', 0, 3),
+(5, 'erkwelkrlůewkrw', 'ůlkerůkerltůker', 'testing', '', 0, 3),
+(6, 'sdfsdfsdf', 'sdfsdfsdf', 'testing', '', 0, 3),
+(7, 'XXXXXXXX', 'XXXXXXXXXXXX', 'testing', '', 0, 3),
+(8, 'LOOOOOOOOOOOOOL', 'asdasdasdasdadasdsda', 'testing', '', 0, 3);
+
+INSERT INTO `Review` (`idReview`, `originality`, `topic`, `technique`, `language`, `recommendation`, `comment`, `User_idUser`) VALUES
+(1, 1, 1, 1, 1, 1, 'dsfsdfsf', 4),
+(2, 1, 1, 1, 1, 4, 'adssadasdsada', 4),
+(3, 1, 1, 1, 1, 1, 'ejtlkjerlkjlektjlektjlertj', 4);
+
+INSERT INTO `Task` (`idTask`, `Post_idPost`, `Made`, `User_idUser`) VALUES
+(1, 2, 1, 4),
+(2, 3, 0, 4),
+(3, 4, 0, 4),
+(4, 5, 1, 4),
+(5, 8, 1, 4);
+
+INSERT INTO `User` (`idUser`, `name`, `email`, `password`, `status`, `ban`, `man`) VALUES
+(1, 'admin', 'admin@email.cz', '$2y$10$bvMX0iyMXMvyxEBq1QjDSucDf21Qi3I1lltyS/.uh4W93EtM1bi32', '3', 0, 1),
+(2, 'test', 'balllak.tomas@gmail.com', '$2y$10$B/E992QdKi1pY7RmfKDcPeAxgj.Nj9/TsWeNNYud376uuh4fmfnFK', '2', 0, 1),
+(3, 'testing', 'test@test.cz', '$2y$10$upNS1.b7A4IlAgzwu3RxhOYX4YZRGuPY2KJzxYTkCwIZjntw7A/k6', '1', 0, 0),
+(4, 'recenzent', 'recenzent@email.cz', '$2y$10$hemBvxwlrteH0RJciacHD.PldIlFpUir8HFbiCnK7X6PxVtHGgGdu', '2', 0, 1);
